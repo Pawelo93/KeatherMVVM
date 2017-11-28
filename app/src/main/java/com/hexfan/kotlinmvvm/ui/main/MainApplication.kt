@@ -11,10 +11,10 @@ import javax.inject.Inject
 /**
  * Created by Paweł Antonik on 28.11.2017.
  */
-class MainApplication : Application(), HasActivityInjector {
+open class MainApplication : Application(), HasActivityInjector {
 
     @Inject
-    lateinit var activityInjector: DispatchingAndroidInjector<Activity>
+    protected lateinit var activityInjector: DispatchingAndroidInjector<Activity>
 
     override fun onCreate() {
         super.onCreate()

@@ -8,7 +8,9 @@ import android.content.Intent
 import android.support.test.InstrumentationRegistry
 import android.support.test.espresso.Espresso.onView
 import android.support.test.espresso.assertion.ViewAssertions
+import android.support.test.espresso.assertion.ViewAssertions.*
 import android.support.test.espresso.matcher.ViewMatchers
+import android.support.test.espresso.matcher.ViewMatchers.*
 import android.support.test.rule.ActivityTestRule
 import android.support.test.runner.AndroidJUnit4
 import com.hexfan.kotlinmvvm.R
@@ -30,14 +32,16 @@ class MainActivityTest{
     @get:Rule
     var activityRule = ActivityTestRule<MainActivity>(MainActivity::class.java, true, false)
 
-    lateinit var viewModel: MainViewModel
     lateinit var data: MutableLiveData<String>
 
     @Before
     fun setup(){
         data = MutableLiveData()
-        viewModel = MainViewModelMock(data)
-        setupInjection()
+
+        TestApplication.setInjector{
+            (it as? MainActivity)?.viewModel = MainViewModelMock(data)
+        }
+
         activityRule.launchActivity(Intent())
     }
 
@@ -50,15 +54,7 @@ class MainActivityTest{
     fun showText(){
         data.postValue("Hello")
 
-        onView(ViewMatchers.withId(R.id.textView)).check(ViewAssertions.matches(ViewMatchers.withText("Hello")))
-    }
-
-    private fun setupInjection(){
-        (InstrumentationRegistry.getInstrumentation().targetContext.applicationContext as? TestApplication)?.injector = generateInjector()
-    }
-
-    private fun generateInjector() = AndroidInjector<Activity> {
-        (it as? MainActivity)?.viewModelFactory = MainViewModelMock.Factory(viewModel)
+        onView(withId(R.id.textView)).check(matches(withText("Hello")))
     }
 
     private class MainViewModelMock(var data: MutableLiveData<String>) : MainViewModel() {
@@ -66,14 +62,5 @@ class MainActivityTest{
         override fun getForecast(): LiveData<String> {
             return data
         }
-
-        class Factory (val viewModel: MainViewModel) : MainViewModel.Factory(){
-
-            override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-                return viewModel as T
-            }
-        }
     }
-
-
 }

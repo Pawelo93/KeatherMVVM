@@ -1,5 +1,6 @@
 package com.hexfan.kotlinmvvm.ui.main
 
+import android.arch.lifecycle.ViewModelProviders
 import dagger.Module
 import dagger.Provides
 
@@ -9,6 +10,11 @@ import dagger.Provides
 
 @Module
 class MainActivityModule {
+
+    @Provides
+    fun provideMainViewModel(mainActivity: MainActivity, factory: MainViewModel.Factory): MainViewModel{
+        return ViewModelProviders.of(mainActivity, factory).get(MainViewModel::class.java)
+    }
 
     @Provides
     fun provideMainViewModelFactory(): MainViewModel.Factory{

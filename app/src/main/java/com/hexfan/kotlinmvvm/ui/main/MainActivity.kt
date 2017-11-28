@@ -16,19 +16,14 @@ import javax.inject.Inject
 class MainActivity : AppCompatActivity() {
 
     @Inject
-    lateinit var viewModelFactory: MainViewModel.Factory
-
-    private lateinit var viewModel: MainViewModel
+    lateinit var viewModel: MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        viewModel = ViewModelProviders.of(this, viewModelFactory).get(MainViewModel::class.java)
         viewModel.getForecast().observe(this, Observer {
             textView.setText(it)
-            println("HERE $it")
         })
     }
 }
