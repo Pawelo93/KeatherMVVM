@@ -21,6 +21,9 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.Mock
+import org.mockito.Mockito
+import org.mockito.MockitoAnnotations
 
 /**
  * Created by Paweł Antonik on 28.11.2017.
@@ -32,16 +35,19 @@ class MainActivityTest{
     @get:Rule
     var activityRule = ActivityTestRule<MainActivity>(MainActivity::class.java, true, false)
 
-    lateinit var data: MutableLiveData<String>
+    @Mock
+    lateinit var viewModel: MainViewModel
+    val data = MutableLiveData<String>()
 
     @Before
     fun setup(){
-        data = MutableLiveData()
+        MockitoAnnotations.initMocks(this)
 
         TestApplication.setInjector{
-            (it as? MainActivity)?.viewModel = MainViewModelMock(data)
+            (it as? MainActivity)?.viewModel = viewModel
         }
 
+        Mockito.`when`(viewModel.getForecast()).thenReturn(data)
         activityRule.launchActivity(Intent())
     }
 
@@ -53,14 +59,6 @@ class MainActivityTest{
     @Test
     fun showText(){
         data.postValue("Hello")
-
         onView(withId(R.id.textView)).check(matches(withText("Hello")))
-    }
-
-    private class MainViewModelMock(var data: MutableLiveData<String>) : MainViewModel() {
-
-        override fun getForecast(): LiveData<String> {
-            return data
-        }
     }
 }

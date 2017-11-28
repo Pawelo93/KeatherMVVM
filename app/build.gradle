@@ -71,6 +71,8 @@ dependencies {
     androidTestImplementation "com.android.support.test.espresso:espresso-intents:$espressoVersion"
     androidTestImplementation "org.mockito:mockito-core:$mockitoVersion"
     androidTestAnnotationProcessor "com.google.dagger:dagger-compiler:$dagger2Version"
+    androidTestCompile "com.linkedin.dexmaker:dexmaker-mockito:$mockitoDexmakerVersion"
+
 
     //Viewmodel
     implementation "android.arch.lifecycle:extensions:$lifecycleVersion"
