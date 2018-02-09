@@ -3,13 +3,13 @@
 buildscript {
     ext{
         kotlinVersion = '1.1.61'
-        supportLibraryVersion = '26.1.0'
+        supportLibraryVersion = '27.0.2'
         constraintLayoutVersion = '1.0.2'
         retrofitVersion = '2.3.0'
+        okhhttpVersion = '3.8.1'
         picassoVersion = '2.5.2'
         roomDatabaseVersion = '1.0.0'
         lifecycleVersion = '1.0.0'
-        okhhttpVersion = '3.8.1'
         dagger2Version = '2.11'
         rxjava2Version = '2.1.0'
         rxandroidVersion = '2.0.1'
@@ -17,6 +17,7 @@ buildscript {
         junitVersion = '4.12'
         espressoVersion = '3.0.1'
         mockitoVersion = '2.7.1'
+        mockitoKotlinVersion = '1.5.0'
         mockitoDexmakerVersion = '2.2.0'
     }
     repositories {

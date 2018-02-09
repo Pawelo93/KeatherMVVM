@@ -1,26 +1,33 @@
 package com.hexfan.kotlinmvvm.ui.main
 
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MutableLiveData
-import android.arch.lifecycle.ViewModel
-import android.arch.lifecycle.ViewModelProvider
+import android.arch.lifecycle.*
+import com.hexfan.kotlinmvvm.model.pojo.Forecast
+import com.hexfan.kotlinmvvm.model.interactors.ForecastInteractor
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.functions.Consumer
+import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 /**
  * Created by Paweł Antonik on 28.11.2017.
  */
-open class MainViewModel : ViewModel(){
+open class MainViewModel @Inject constructor(val forecastInteractor: ForecastInteractor) : ViewModel(){
 
-    private val forecastData = MutableLiveData<String>()
+    var forecast = MutableLiveData<Forecast>()
 
-    open fun getForecast(): LiveData<String>{
-        return forecastData
+    fun loadForecast(){
+        forecastInteractor.execute()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe{
+                    forecast.postValue(it)
+                }
     }
 
-    class Factory @Inject constructor() : ViewModelProvider.Factory{
+    open class Factory @Inject constructor(private val forecastInteractor: ForecastInteractor) : ViewModelProvider.Factory{
 
-        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            return MainViewModel() as T
+        open override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+            return MainViewModel(forecastInteractor) as T
         }
     }
 }

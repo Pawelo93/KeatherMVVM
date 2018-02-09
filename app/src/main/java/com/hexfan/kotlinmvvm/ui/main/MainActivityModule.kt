@@ -1,6 +1,9 @@
 package com.hexfan.kotlinmvvm.ui.main
 
-import android.arch.lifecycle.ViewModelProviders
+import com.hexfan.kotlinmvvm.model.api.ForecastApiService
+import com.hexfan.kotlinmvvm.model.api.ForecastService
+import com.hexfan.kotlinmvvm.model.api.OpenWeatherMapService
+import com.hexfan.kotlinmvvm.model.interactors.ForecastInteractor
 import dagger.Module
 import dagger.Provides
 
@@ -12,12 +15,23 @@ import dagger.Provides
 class MainActivityModule {
 
     @Provides
-    fun provideMainViewModel(mainActivity: MainActivity, factory: MainViewModel.Factory): MainViewModel{
-        return ViewModelProviders.of(mainActivity, factory).get(MainViewModel::class.java)
+    fun provideMainViewModelFactory(forecastInteractor: ForecastInteractor): MainViewModel.Factory{
+        return MainViewModel.Factory(forecastInteractor)
     }
 
     @Provides
-    fun provideMainViewModelFactory(): MainViewModel.Factory{
-        return MainViewModel.Factory()
+    fun provideForecastInteractor(forecastService: ForecastService): ForecastInteractor {
+        return ForecastInteractor(forecastService)
     }
+
+    @Provides
+    fun provideForecastApiService(service: OpenWeatherMapService): ForecastApiService {
+        return ForecastApiService(service)
+    }
+
+    @Provides
+    fun provideForecastService(forecastApiService: ForecastApiService): ForecastService {
+        return forecastApiService
+    }
+
 }

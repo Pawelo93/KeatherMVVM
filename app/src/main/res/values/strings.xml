@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">KotlinMVVM</string>
+
+    <string name="temperature">%d \u2103</string>
+    <string name="na">N/A</string>
+    <string name="pressure">%d hPa</string>
+    <string name="speed">%.2f km/h</string>
+    <string name="humidity">%d %%</string>
+
 </resources>

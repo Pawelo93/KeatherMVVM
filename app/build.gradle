@@ -19,11 +19,35 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
+    sourceSets {
+        String testUtilsDirectory = 'src/testCommons/java'
+        test {
+            java.srcDirs += testUtilsDirectory
+        }
+        androidTest {
+            java.srcDirs += testUtilsDirectory
+        }
+    }
+
+    def apiConfigFile = file("apiconfig.gradle")
+    def apiConfigProperties = new Properties()
+    apiConfigProperties.load(new FileInputStream(apiConfigFile))
+
+    buildTypes.each {
+        it.buildConfigField 'String', 'API_KEY', apiConfigProperties['OpenWeatherMapApiKey']
+        it.buildConfigField 'String', 'SERVER_URL', "\"http://api.openweathermap.org/data/2.5/\""
+    }
+
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlinVersion"
+    implementation 'androidx.core:core-ktx:0.1'
 
     // android support libraries
     implementation "com.android.support:appcompat-v7:$supportLibraryVersion"
@@ -65,6 +89,7 @@ dependencies {
     testImplementation "junit:junit:$junitVersion"
     testImplementation "org.mockito:mockito-core:$mockitoVersion"
     testAnnotationProcessor "com.google.dagger:dagger-compiler:$dagger2Version"
+    androidTestImplementation "com.nhaarman:mockito-kotlin-kt1.1:$mockitoKotlinVersion"
 
     // UI Testing
     androidTestImplementation "com.android.support.test.espresso:espresso-core:$espressoVersion"
