@@ -10,7 +10,7 @@ import retrofit2.http.Query
  */
 interface OpenWeatherMapService {
 
-    @GET("weather")
+    @GET("weather?units=metric")
     fun getForecast(@Query("lat") latitude: Double, @Query("lon") longitude: Double): Flowable<ForecastResponse>
 
 }

@@ -1,6 +1,7 @@
 package com.hexfan.kotlinmvvm.ui.main
 
 import android.arch.lifecycle.*
+import android.location.Location
 import com.hexfan.kotlinmvvm.model.pojo.Forecast
 import com.hexfan.kotlinmvvm.model.interactors.ForecastInteractor
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -15,8 +16,8 @@ open class MainViewModel @Inject constructor(val forecastInteractor: ForecastInt
 
     var forecast = MutableLiveData<Forecast>()
 
-    fun loadForecast(){
-        forecastInteractor.execute()
+    fun loadForecast(location: Location){
+        forecastInteractor.execute(location.latitude, location.longitude)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe{

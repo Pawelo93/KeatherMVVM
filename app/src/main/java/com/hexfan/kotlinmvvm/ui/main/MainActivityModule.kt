@@ -1,5 +1,6 @@
 package com.hexfan.kotlinmvvm.ui.main
 
+import com.hexfan.kotlinmvvm.utils.ReactiveLocationProvider
 import com.hexfan.kotlinmvvm.model.api.ForecastApiService
 import com.hexfan.kotlinmvvm.model.api.ForecastService
 import com.hexfan.kotlinmvvm.model.api.OpenWeatherMapService
@@ -15,8 +16,8 @@ import dagger.Provides
 class MainActivityModule {
 
     @Provides
-    fun provideMainViewModelFactory(forecastInteractor: ForecastInteractor): MainViewModel.Factory{
-        return MainViewModel.Factory(forecastInteractor)
+    fun provideForecastApiService(service: OpenWeatherMapService): ForecastService {
+        return ForecastApiService(service)
     }
 
     @Provides
@@ -25,13 +26,13 @@ class MainActivityModule {
     }
 
     @Provides
-    fun provideForecastApiService(service: OpenWeatherMapService): ForecastApiService {
-        return ForecastApiService(service)
+    fun provideMainViewModelFactory(forecastInteractor: ForecastInteractor): MainViewModel.Factory{
+        return MainViewModel.Factory(forecastInteractor)
     }
 
     @Provides
-    fun provideForecastService(forecastApiService: ForecastApiService): ForecastService {
-        return forecastApiService
+    fun provideReactiveLocationProvider(activity: MainActivity): ReactiveLocationProvider {
+        return ReactiveLocationProvider(activity)
     }
 
 }

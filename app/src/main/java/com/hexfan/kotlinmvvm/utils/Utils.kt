@@ -1,4 +1,4 @@
-package com.hexfan.kotlinmvvm
+package com.hexfan.kotlinmvvm.utils
 
 import android.arch.lifecycle.LifecycleOwner
 import android.arch.lifecycle.LiveData

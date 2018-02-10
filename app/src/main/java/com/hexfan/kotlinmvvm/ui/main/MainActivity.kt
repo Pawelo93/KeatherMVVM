@@ -1,15 +1,20 @@
 package com.hexfan.kotlinmvvm.ui.main
 
+import android.Manifest
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import com.hexfan.kotlinmvvm.utils.PermissionsManager
 import com.hexfan.kotlinmvvm.R
+import com.hexfan.kotlinmvvm.utils.ReactiveLocationProvider
 import com.hexfan.kotlinmvvm.model.pojo.Forecast
 import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
-import com.hexfan.kotlinmvvm.observe
+import com.hexfan.kotlinmvvm.utils.observe
 import com.squareup.picasso.Picasso
+import timber.log.Timber
+import java.util.concurrent.TimeUnit
 
 /**
 * Created by Paweł Antonik on 28.11.2017.
@@ -21,6 +26,9 @@ class MainActivity : AppCompatActivity() {
     lateinit var factory: MainViewModel.Factory
     lateinit var viewModel: MainViewModel
 
+    @Inject
+    lateinit var reactiveLocationProvider: ReactiveLocationProvider
+
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
@@ -30,8 +38,21 @@ class MainActivity : AppCompatActivity() {
 
         if(savedInstanceState == null) {
             println("load")
-            viewModel.loadForecast()
+//            viewModel.loadForecast()
         }
+
+
+        PermissionsManager.need(this, Manifest.permission.ACCESS_FINE_LOCATION, object : PermissionsManager.Callback{
+            override fun permissionGranted(requestCode: Int) {
+                println("Granted")
+                reactiveLocationProvider.loadLocation()
+            }
+
+            override fun permissionCanceled() {
+                println("Canceled")
+                finish()
+            }
+        })
     }
 
     override fun onResume() {
@@ -41,6 +62,19 @@ class MainActivity : AppCompatActivity() {
             onForecastProvided(it)
         }
 
+//        reactiveLocationProvider.locations
+//                .subscribe{
+//                    viewModel.loadForecast(it)
+//                }
+        reactiveLocationProvider.locations.observe(this) {
+            Timber.d("got location : $it")
+            viewModel.loadForecast(it)
+        }
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        PermissionsManager.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
 
     private fun onForecastProvided(forecast: Forecast?) {
