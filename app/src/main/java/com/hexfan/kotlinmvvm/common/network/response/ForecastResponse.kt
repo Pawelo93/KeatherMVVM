@@ -1,8 +1,4 @@
-package com.hexfan.kotlinmvvm.model.pojo
-
-/**
- * Created by Pawel on 11.12.2017.
- */
+package com.hexfan.kotlinmvvm.common.domain.model
 
 data class ForecastResponse(
         val name: String,

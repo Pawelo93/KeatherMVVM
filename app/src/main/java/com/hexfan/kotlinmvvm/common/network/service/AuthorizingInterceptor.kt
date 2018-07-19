@@ -4,9 +4,6 @@ import com.hexfan.kotlinmvvm.BuildConfig
 import okhttp3.Interceptor
 import okhttp3.Response
 
-/**
- * Created by Pawel on 11.12.2017.
- */
 class AuthorizingInterceptor : Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response {

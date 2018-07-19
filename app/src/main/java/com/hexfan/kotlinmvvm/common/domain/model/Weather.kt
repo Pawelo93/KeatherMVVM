@@ -1,8 +1,5 @@
 package com.hexfan.kotlinmvvm.model.pojo
 
-/**
- * Created by Pawel on 11.12.2017.
- */
 data class Weather(
         val temperature: Int,
         val pressure: Int,

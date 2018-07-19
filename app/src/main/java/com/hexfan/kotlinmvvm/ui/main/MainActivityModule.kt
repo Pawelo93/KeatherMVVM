@@ -1,16 +1,14 @@
-package com.hexfan.kotlinmvvm.ui.main
+package com.hexfan.kotlinmvvm.di.module
 
-import com.hexfan.kotlinmvvm.utils.ReactiveLocationProvider
 import com.hexfan.kotlinmvvm.model.api.ForecastApiService
-import com.hexfan.kotlinmvvm.model.api.ForecastService
+import com.hexfan.kotlinmvvm.common.network.service.ForecastService
 import com.hexfan.kotlinmvvm.model.api.OpenWeatherMapService
-import com.hexfan.kotlinmvvm.model.interactors.ForecastInteractor
+import com.hexfan.kotlinmvvm.common.domain.GetForecastUseCase
+import com.hexfan.kotlinmvvm.ui.main.MainActivity
+import com.hexfan.kotlinmvvm.ui.main.MainViewModel
+import com.hexfan.kotlinmvvm.utils.ReactiveLocationProvider
 import dagger.Module
 import dagger.Provides
-
-/**
- * Created by Paweł Antonik on 28.11.2017.
- */
 
 @Module
 class MainActivityModule {
@@ -21,13 +19,13 @@ class MainActivityModule {
     }
 
     @Provides
-    fun provideForecastInteractor(forecastService: ForecastService): ForecastInteractor {
-        return ForecastInteractor(forecastService)
+    fun provideForecastInteractor(forecastService: ForecastService): GetForecastUseCase {
+        return GetForecastUseCase(forecastService)
     }
 
     @Provides
-    fun provideMainViewModelFactory(forecastInteractor: ForecastInteractor): MainViewModel.Factory{
-        return MainViewModel.Factory(forecastInteractor)
+    fun provideMainViewModelFactory(getForecastUseCase: GetForecastUseCase): MainViewModel.Factory {
+        return MainViewModel.Factory(getForecastUseCase)
     }
 
     @Provides
