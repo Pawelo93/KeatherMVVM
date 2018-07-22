@@ -1,6 +1,6 @@
 package com.hexfan.kotlinmvvm.model.api
 
-import com.hexfan.kotlinmvvm.common.network.response.ForecastResponse
+import com.hexfan.kotlinmvvm.common.domain.model.ForecastResponse
 import io.reactivex.Flowable
 import retrofit2.http.GET
 import retrofit2.http.Query

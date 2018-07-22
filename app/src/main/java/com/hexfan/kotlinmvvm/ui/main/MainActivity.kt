@@ -16,11 +16,7 @@ import com.squareup.picasso.Picasso
 import timber.log.Timber
 import java.util.concurrent.TimeUnit
 
-/**
-* Created by Paweł Antonik on 28.11.2017.
-*/
 class MainActivity : AppCompatActivity() {
-
 
     @Inject
     lateinit var factory: MainViewModel.Factory

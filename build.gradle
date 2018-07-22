@@ -2,19 +2,19 @@
 
 buildscript {
     ext{
-        kotlinVersion = '1.1.61'
-        supportLibraryVersion = '27.0.2'
-        playServiceVersion = '11.8.0'
-        constraintLayoutVersion = '1.0.2'
+        kotlinVersion = '1.2.51'
+        supportLibraryVersion = '27.1.1'
+        playServiceVersion = '15.0.1'
+        constraintLayoutVersion = '1.1.2'
         retrofitVersion = '2.3.0'
         okhhttpVersion = '3.8.1'
         picassoVersion = '2.5.2'
-        roomDatabaseVersion = '1.0.0'
-        lifecycleVersion = '1.1.0'
-        dagger2Version = '2.11'
+        roomDatabaseVersion = '1.1.1'
+        lifecycleVersion = '1.1.1'
+        dagger2Version = '2.14.1'
         rxjava2Version = '2.1.0'
         rxandroidVersion = '2.0.1'
-        timberVersion = '4.6.0'
+        timberVersion = '4.7.0'
         junitVersion = '4.12'
         espressoVersion = '3.0.1'
         mockitoVersion = '2.7.1'
@@ -26,7 +26,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.1'
+        classpath 'com.android.tools.build:gradle:3.2.0-beta02'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
 
         // NOTE: Do not place your application dependencies here; they belong

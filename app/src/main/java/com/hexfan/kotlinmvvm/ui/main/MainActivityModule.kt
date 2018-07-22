@@ -1,9 +1,8 @@
 package com.hexfan.kotlinmvvm.di.module
 
-import com.hexfan.kotlinmvvm.model.api.ForecastApiService
-import com.hexfan.kotlinmvvm.common.network.service.ForecastService
-import com.hexfan.kotlinmvvm.model.api.OpenWeatherMapService
 import com.hexfan.kotlinmvvm.common.domain.GetForecastUseCase
+import com.hexfan.kotlinmvvm.common.mappers.ForecastMapper
+import com.hexfan.kotlinmvvm.model.api.OpenWeatherMapService
 import com.hexfan.kotlinmvvm.ui.main.MainActivity
 import com.hexfan.kotlinmvvm.ui.main.MainViewModel
 import com.hexfan.kotlinmvvm.utils.ReactiveLocationProvider
@@ -14,13 +13,11 @@ import dagger.Provides
 class MainActivityModule {
 
     @Provides
-    fun provideForecastApiService(service: OpenWeatherMapService): ForecastService {
-        return ForecastApiService(service)
-    }
+    fun provideForecastMapper() = ForecastMapper()
 
     @Provides
-    fun provideForecastInteractor(forecastService: ForecastService): GetForecastUseCase {
-        return GetForecastUseCase(forecastService)
+    fun provideForecastInteractor(forecastService: OpenWeatherMapService, forecastMapper: ForecastMapper): GetForecastUseCase {
+        return GetForecastUseCase(forecastService, forecastMapper)
     }
 
     @Provides

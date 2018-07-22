@@ -1,6 +1,8 @@
 package com.hexfan.kotlinmvvm.di
 
 import com.hexfan.kotlinmvvm.common.network.NetworkModule
+import com.hexfan.kotlinmvvm.di.module.ActivityModule
+import com.hexfan.kotlinmvvm.di.module.FragmentModule
 import com.hexfan.kotlinmvvm.ui.main.MainApplication
 import dagger.BindsInstance
 import dagger.Component
@@ -8,7 +10,7 @@ import dagger.android.support.AndroidSupportInjectionModule
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [AppModule::class, NetworkModule::class, ActivityBuilder::class, AndroidSupportInjectionModule::class])
+@Component(modules = [AppModule::class, NetworkModule::class, ActivityModule::class, FragmentModule::class, AndroidSupportInjectionModule::class])
 interface AppComponent {
 
     @Component.Builder

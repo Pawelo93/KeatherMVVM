@@ -9,9 +9,6 @@ import dagger.android.HasActivityInjector
 import timber.log.Timber
 import javax.inject.Inject
 
-/**
- * Created by Paweł Antonik on 28.11.2017.
- */
 open class MainApplication : Application(), HasActivityInjector {
 
     @Inject
