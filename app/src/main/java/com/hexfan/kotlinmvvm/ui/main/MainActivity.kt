@@ -58,10 +58,6 @@ class MainActivity : AppCompatActivity() {
             onForecastProvided(it)
         }
 
-//        reactiveLocationProvider.locations
-//                .subscribe{
-//                    viewModel.loadForecast(it)
-//                }
         reactiveLocationProvider.locations.observe(this) {
             Timber.d("got location : $it")
             viewModel.loadForecast(it)
