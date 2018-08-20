@@ -70,27 +70,27 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun onForecastProvided(forecast: Forecast?) {
-        if (forecast != null) {
-            val (weather, city) = forecast
-            temperatureTextView.text = getString(R.string.temperature, weather.temperature)
-            cityTextView.text = city
-            descriptionTextView.text = weather.description
-            humidityTextView.text = getString(R.string.humidity, weather.humidity)
-            pressureTextView.text = getString(R.string.pressure, weather.pressure)
-            windTextView.text = getString(R.string.speed, weather.windSpeed)
-
-            Picasso.with(this)
-                    .load(weather.iconUrl)
-                    .into(icon)
-
-        } else {
-            temperatureTextView.setText(R.string.na)
-            cityTextView.setText(R.string.na)
-            descriptionTextView.setText(R.string.na)
-            humidityTextView.setText(R.string.na)
-            pressureTextView.setText(R.string.na)
-            windTextView.setText(R.string.na)
-        }
+//        if (forecast != null) {
+//            val (weather, city) = forecast
+//            temperatureTextView.text = getString(R.string.temperature, weather.temperature)
+//            cityTextView.text = city
+//            descriptionTextView.text = weather.description
+//            humidityTextView.text = getString(R.string.humidity, weather.humidity)
+//            pressureTextView.text = getString(R.string.pressure, weather.pressure)
+//            windTextView.text = getString(R.string.speed, weather.windSpeed)
+//
+//            Picasso.with(this)
+//                    .load(weather.iconUrl)
+//                    .into(icon)
+//
+//        } else {
+//            temperatureTextView.setText(R.string.na)
+//            cityTextView.setText(R.string.na)
+//            descriptionTextView.setText(R.string.na)
+//            humidityTextView.setText(R.string.na)
+//            pressureTextView.setText(R.string.na)
+//            windTextView.setText(R.string.na)
+//        }
     }
 
 }
