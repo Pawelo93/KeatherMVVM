@@ -7,6 +7,7 @@ import com.hexfan.kotlinmvvm.model.pojo.Weather
 class ForecastMapper {
 
     fun execute(forecastResponse: ForecastResponse): Forecast {
+        println(forecastResponse)
         val iconUrl = "http://openweathermap.org/img/w/${forecastResponse.weather[0].icon}.png"
         val weather = Weather(forecastResponse.main.temp.toInt(),
                 forecastResponse.main.pressure.toInt(),
@@ -14,6 +15,6 @@ class ForecastMapper {
                 forecastResponse.weather.firstOrNull()?.main ?: "",
                 iconUrl
         )
-        return Forecast(weather, forecastResponse.name)
+        return Forecast(forecastResponse.id, weather, forecastResponse.name)
     }
 }

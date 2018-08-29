@@ -4,29 +4,50 @@ import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
 import android.location.Location
-import com.hexfan.kotlinmvvm.common.domain.GetForecastUseCase
+import com.hexfan.kotlinmvvm.common.domain.GetTodayForecastUseCase
+import com.hexfan.kotlinmvvm.common.rx.RxTransformer
 import com.hexfan.kotlinmvvm.model.pojo.Forecast
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.disposables.Disposable
 import javax.inject.Inject
 
-open class MainViewModel @Inject constructor(val getForecastUseCase: GetForecastUseCase) : ViewModel() {
+open class MainViewModel @Inject constructor(val getTodayForecastUseCase: GetTodayForecastUseCase,
+                                             val rxTransformer: RxTransformer) : ViewModel() {
 
-    var forecast = MutableLiveData<Forecast>()
+    var todayForecast = MutableLiveData<Forecast>()
+    val compositeDisposable = CompositeDisposable()
 
     fun loadForecast(location: Location) {
-        val disposable = getForecastUseCase.execute(location.latitude, location.longitude)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+        getTodayForecastUseCase.execute(location.latitude, location.longitude)
+                .compose(rxTransformer.flowable())
                 .subscribe {
-                    forecast.postValue(it)
-                }
+                    todayForecast.postValue(it)
+                    loadYesterdayForecast(it.cityId)
+                }.remember()
     }
 
-    open class Factory @Inject constructor(private val getForecastUseCase: GetForecastUseCase) : ViewModelProvider.Factory {
+    fun loadYesterdayForecast(cityId: Int) {
+//        getTodayForecastUseCase.execute(location.latitude, location.longitude)
+//                .compose(rxTransformer.flowable())
+//                .subscribe {
+//                    todayForecast.postValue(it)
+//                    loadYesterdayForecast(it.cityId)
+//                }.remember()
+    }
+
+    fun Disposable.remember() {
+        compositeDisposable.add(this)
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        compositeDisposable.clear()
+    }
+    open class Factory @Inject constructor(private val getTodayForecastUseCase: GetTodayForecastUseCase,
+                                           private val rxTransformer: RxTransformer) : ViewModelProvider.Factory {
 
         open override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            return MainViewModel(getForecastUseCase) as T
+            return MainViewModel(getTodayForecastUseCase, rxTransformer) as T
         }
     }
 }

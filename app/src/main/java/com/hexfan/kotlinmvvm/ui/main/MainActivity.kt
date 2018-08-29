@@ -4,17 +4,14 @@ import android.Manifest
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import com.hexfan.kotlinmvvm.utils.PermissionsManager
 import com.hexfan.kotlinmvvm.R
-import com.hexfan.kotlinmvvm.utils.ReactiveLocationProvider
 import com.hexfan.kotlinmvvm.model.pojo.Forecast
-import dagger.android.AndroidInjection
-import kotlinx.android.synthetic.main.activity_main.*
-import javax.inject.Inject
+import com.hexfan.kotlinmvvm.utils.PermissionsManager
+import com.hexfan.kotlinmvvm.utils.ReactiveLocationProvider
 import com.hexfan.kotlinmvvm.utils.observe
-import com.squareup.picasso.Picasso
+import dagger.android.AndroidInjection
 import timber.log.Timber
-import java.util.concurrent.TimeUnit
+import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
 
@@ -32,13 +29,13 @@ class MainActivity : AppCompatActivity() {
 
         viewModel = ViewModelProviders.of(this, factory).get(MainViewModel::class.java)
 
-        if(savedInstanceState == null) {
+        if (savedInstanceState == null) {
             println("load")
 //            viewModel.loadForecast()
         }
 
 
-        PermissionsManager.need(this, Manifest.permission.ACCESS_FINE_LOCATION, object : PermissionsManager.Callback{
+        PermissionsManager.need(this, Manifest.permission.ACCESS_FINE_LOCATION, object : PermissionsManager.Callback {
             override fun permissionGranted(requestCode: Int) {
                 println("Granted")
                 reactiveLocationProvider.loadLocation()
@@ -54,8 +51,8 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         println("onResume")
-        viewModel.forecast.observe(this){
-            onForecastProvided(it)
+        viewModel.todayForecast.observe(this) {
+            onTodayForecastProvided(it)
         }
 
         reactiveLocationProvider.locations.observe(this) {
@@ -69,9 +66,10 @@ class MainActivity : AppCompatActivity() {
         PermissionsManager.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
 
-    private fun onForecastProvided(forecast: Forecast?) {
-//        if (forecast != null) {
-//            val (weather, city) = forecast
+    private fun onTodayForecastProvided(forecast: Forecast?) {
+        println(forecast)
+//        if (todayForecast != null) {
+//            val (weather, city) = todayForecast
 //            temperatureTextView.text = getString(R.string.temperature, weather.temperature)
 //            cityTextView.text = city
 //            descriptionTextView.text = weather.description

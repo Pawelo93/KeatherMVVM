@@ -6,11 +6,11 @@ import com.hexfan.kotlinmvvm.model.pojo.Forecast
 import io.reactivex.Flowable
 import javax.inject.Inject
 
-open class GetForecastUseCase @Inject constructor(private val openWeatherMapService: OpenWeatherMapService,
-                                                  private val forecastMapper: ForecastMapper) {
+open class GetTodayForecastUseCase @Inject constructor(private val openWeatherMapService: OpenWeatherMapService,
+                                                       private val forecastMapper: ForecastMapper) {
 
     open fun execute(latitude: Double = 0.0, longitude: Double = 0.0): Flowable<Forecast> {
-        return openWeatherMapService.getForecast(latitude, longitude)
+        return openWeatherMapService.getTodayForecast(latitude, longitude)
                 .map(forecastMapper::execute)
                 .onErrorResumeNext(Flowable.empty())
     }

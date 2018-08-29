@@ -1,6 +1,7 @@
 package com.hexfan.kotlinmvvm.common.domain.model
 
 data class ForecastResponse(
+        val id: Int,
         val name: String,
         val wind: WindResponse,
         val weather: List<WeatherResponse>,

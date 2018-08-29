@@ -3,6 +3,7 @@ package com.hexfan.kotlinmvvm.di
 import android.app.Application
 import android.content.Context
 import com.hexfan.kotlinmvvm.BuildConfig
+import com.hexfan.kotlinmvvm.common.rx.IOTransformer
 import com.hexfan.kotlinmvvm.model.api.AuthorizingInterceptor
 import com.hexfan.kotlinmvvm.model.api.OpenWeatherMapService
 import dagger.Module
@@ -21,4 +22,7 @@ class AppModule {
     fun applicationContext(application: Application): Context {
         return application
     }
+
+    @Provides
+    fun ioTransformer() = IOTransformer()
 }
