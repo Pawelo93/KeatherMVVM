@@ -28,7 +28,6 @@ class ReactiveLocationProvider(val context: Context) : LocationListener {
 
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 10000.toLong(), 0f, this)
             val lastKnownLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-
             locations.value = lastKnownLocation
         }
     }

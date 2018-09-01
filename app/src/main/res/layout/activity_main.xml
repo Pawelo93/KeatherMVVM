@@ -5,54 +5,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
     <include
         android:id="@+id/todayWeather"
         layout="@layout/today_weather_view"
         android:layout_width="match_parent"
-        android:layout_height="330dp"/>
+        android:layout_height="match_parent"/>
 
     <TextView
-        android:id="@+id/yesterdayName"
+        android:id="@+id/textViewCity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="42dp"
-        android:layout_marginTop="24dp"
-        android:text="Yesterday"
-        android:textColor="@android:color/black"
-        android:textSize="18sp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="8dp"
+        android:textColor="@color/white"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/todayWeather"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="42dp"
-        tools:text="@string/temperature"
-        android:text="@string/temperature"
-        android:textSize="18sp"
-        app:layout_constraintTop_toTopOf="@+id/yesterdayName"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <TextView
-        android:id="@+id/tomorrowName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="42dp"
-        android:layout_marginTop="24dp"
-        android:text="Tomorrow"
-        android:textColor="@android:color/black"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/yesterdayName"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="42dp"
-        tools:text="@string/temperature"
-        android:text="@string/temperature"
-        android:textSize="18sp"
-        app:layout_constraintTop_toTopOf="@+id/tomorrowName"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Twoje miasto" />
 
 </android.support.constraint.ConstraintLayout>

@@ -17,13 +17,15 @@ open class MainViewModel @Inject constructor(val getTodayForecastUseCase: GetTod
     var todayForecast = MutableLiveData<Forecast>()
     val compositeDisposable = CompositeDisposable()
 
-    fun loadForecast(location: Location) {
-        getTodayForecastUseCase.execute(location.latitude, location.longitude)
-                .compose(rxTransformer.flowable())
-                .subscribe {
+    fun loadForecast(latitude: Double, longitude: Double) {
+        getTodayForecastUseCase.execute(latitude, longitude)
+                .compose(rxTransformer.single())
+                .subscribe({
                     todayForecast.postValue(it)
                     loadYesterdayForecast(it.cityId)
-                }.remember()
+                }, {
+                    println("Error ${it.message}")
+                }).remember()
     }
 
     fun loadYesterdayForecast(cityId: Int) {
@@ -43,6 +45,7 @@ open class MainViewModel @Inject constructor(val getTodayForecastUseCase: GetTod
         super.onCleared()
         compositeDisposable.clear()
     }
+
     open class Factory @Inject constructor(private val getTodayForecastUseCase: GetTodayForecastUseCase,
                                            private val rxTransformer: RxTransformer) : ViewModelProvider.Factory {
 

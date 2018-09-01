@@ -10,6 +10,8 @@ import com.hexfan.kotlinmvvm.utils.PermissionsManager
 import com.hexfan.kotlinmvvm.utils.ReactiveLocationProvider
 import com.hexfan.kotlinmvvm.utils.observe
 import dagger.android.AndroidInjection
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.today_weather_view.*
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -29,20 +31,12 @@ class MainActivity : AppCompatActivity() {
 
         viewModel = ViewModelProviders.of(this, factory).get(MainViewModel::class.java)
 
-        if (savedInstanceState == null) {
-            println("load")
-//            viewModel.loadForecast()
-        }
-
-
         PermissionsManager.need(this, Manifest.permission.ACCESS_FINE_LOCATION, object : PermissionsManager.Callback {
             override fun permissionGranted(requestCode: Int) {
-                println("Granted")
                 reactiveLocationProvider.loadLocation()
             }
 
             override fun permissionCanceled() {
-                println("Canceled")
                 finish()
             }
         })
@@ -50,14 +44,13 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        println("onResume")
         viewModel.todayForecast.observe(this) {
             onTodayForecastProvided(it)
         }
 
         reactiveLocationProvider.locations.observe(this) {
             Timber.d("got location : $it")
-            viewModel.loadForecast(it)
+            viewModel.loadForecast(it.latitude, it.longitude)
         }
     }
 
@@ -68,27 +61,15 @@ class MainActivity : AppCompatActivity() {
 
     private fun onTodayForecastProvided(forecast: Forecast?) {
         println(forecast)
-//        if (todayForecast != null) {
-//            val (weather, city) = todayForecast
-//            temperatureTextView.text = getString(R.string.temperature, weather.temperature)
-//            cityTextView.text = city
-//            descriptionTextView.text = weather.description
-//            humidityTextView.text = getString(R.string.humidity, weather.humidity)
-//            pressureTextView.text = getString(R.string.pressure, weather.pressure)
-//            windTextView.text = getString(R.string.speed, weather.windSpeed)
-//
-//            Picasso.with(this)
-//                    .load(weather.iconUrl)
-//                    .into(icon)
-//
-//        } else {
-//            temperatureTextView.setText(R.string.na)
-//            cityTextView.setText(R.string.na)
-//            descriptionTextView.setText(R.string.na)
-//            humidityTextView.setText(R.string.na)
-//            pressureTextView.setText(R.string.na)
-//            windTextView.setText(R.string.na)
-//        }
+        forecast?.let {
+            val (id, weather, city) = forecast
+            textViewCity.text = city
+            textViewTemp.text = resources.getString(R.string.temperature, weather.temperature)
+            textViewWindSpeed.text = resources.getString(R.string.wind_speed, weather.windSpeed)
+            textViewHumidity.text = getString(R.string.humidity, weather.humidity)
+            textViewPressure.text = getString(R.string.pressure, weather.pressure)
+
+        }
     }
 
 }

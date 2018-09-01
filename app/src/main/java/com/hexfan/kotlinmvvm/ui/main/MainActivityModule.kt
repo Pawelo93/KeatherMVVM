@@ -1,7 +1,6 @@
 package com.hexfan.kotlinmvvm.di.module
 
 import com.hexfan.kotlinmvvm.common.domain.GetTodayForecastUseCase
-import com.hexfan.kotlinmvvm.common.mappers.ForecastMapper
 import com.hexfan.kotlinmvvm.common.rx.IOTransformer
 import com.hexfan.kotlinmvvm.model.api.OpenWeatherMapService
 import com.hexfan.kotlinmvvm.ui.main.MainActivity
@@ -14,11 +13,8 @@ import dagger.Provides
 class MainActivityModule {
 
     @Provides
-    fun provideForecastMapper() = ForecastMapper()
-
-    @Provides
-    fun provideForecastInteractor(forecastService: OpenWeatherMapService, forecastMapper: ForecastMapper): GetTodayForecastUseCase {
-        return GetTodayForecastUseCase(forecastService, forecastMapper)
+    fun provideForecastInteractor(forecastService: OpenWeatherMapService): GetTodayForecastUseCase {
+        return GetTodayForecastUseCase(forecastService)
     }
 
     @Provides
