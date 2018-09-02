@@ -24,7 +24,7 @@ App is using:
 * Unit tests
 ```
     @Test
-    fun todayForecast_type1() {
+    fun getTodayForecast() {
         val latitude = 5.0
         val longitude = 10.0
         val forecast = Forecast(1, Weather(0, 0, 0, 0.0, "", ""), "Test")
@@ -38,7 +38,7 @@ App is using:
 * Integration tests
 ```
     @Test
-    fun testExecute() {
+    fun getTodayForecast() {
         val latitude = 0.0
         val longitude = 0.0
         val forecastResponse = ForecastResponse(
@@ -63,7 +63,7 @@ App is using:
 
 * UI tests
 ```
-@Before
+    @Before
     fun setup() {
         MockitoAnnotations.initMocks(this)
 
