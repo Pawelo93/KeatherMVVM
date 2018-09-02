@@ -92,7 +92,7 @@ dependencies {
     testImplementation "junit:junit:$junitVersion"
     testImplementation "org.mockito:mockito-core:$mockitoVersion"
     testAnnotationProcessor "com.google.dagger:dagger-compiler:$dagger2Version"
-    testImplementation "com.nhaarman:mockito-kotlin-kt1.1:$mockitoKotlinVersion"
+    implementation "com.nhaarman:mockito-kotlin-kt1.1:$mockitoKotlinVersion"
     testImplementation "android.arch.core:core-testing:$lifecycleVersion"
 
     // UI Testing
