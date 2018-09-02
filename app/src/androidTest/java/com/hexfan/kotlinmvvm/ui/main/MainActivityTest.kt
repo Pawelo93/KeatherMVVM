@@ -6,25 +6,21 @@ import android.content.Intent
 import android.support.test.rule.ActivityTestRule
 import android.support.test.runner.AndroidJUnit4
 import com.hexfan.kotlinmvvm.TestApplication
-import com.hexfan.kotlinmvvm.common.domain.GetTodayForecastUseCase
+import com.hexfan.kotlinmvvm.common.domain.forecast.GetTodayForecastUseCase
+import com.hexfan.kotlinmvvm.common.domain.model.Forecast
+import com.hexfan.kotlinmvvm.common.domain.model.Weather
 import com.hexfan.kotlinmvvm.common.rx.IOTransformer
 import com.hexfan.kotlinmvvm.common.rx.RxTransformer
-import com.hexfan.kotlinmvvm.model.pojo.Forecast
-import com.hexfan.kotlinmvvm.model.pojo.Weather
 import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.whenever
 import io.reactivex.Flowable
+import io.reactivex.Single
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
-
-
-/**
- * Created by Paweł Antonik on 28.11.2017.
- */
 
 @RunWith(AndroidJUnit4::class)
 class MainActivityTest {
@@ -51,7 +47,7 @@ class MainActivityTest {
             (it as? MainActivity)?.factory = ForecastViewModelFactoryMock(viewModel)
         }
 
-        whenever(interactor.execute()).thenReturn(Flowable.just(forecast))
+        whenever(interactor.execute()).thenReturn(Single.just(forecast))
         activityRule.launchActivity(Intent())
     }
 

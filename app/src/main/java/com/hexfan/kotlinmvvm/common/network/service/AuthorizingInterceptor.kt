@@ -1,4 +1,4 @@
-package com.hexfan.kotlinmvvm.model.api
+package com.hexfan.kotlinmvvm.common.network.service
 
 import com.hexfan.kotlinmvvm.BuildConfig
 import okhttp3.Interceptor

@@ -3,10 +3,9 @@ package com.hexfan.kotlinmvvm.ui.main
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
-import android.location.Location
-import com.hexfan.kotlinmvvm.common.domain.GetTodayForecastUseCase
+import com.hexfan.kotlinmvvm.common.domain.forecast.GetTodayForecastUseCase
+import com.hexfan.kotlinmvvm.common.domain.model.Forecast
 import com.hexfan.kotlinmvvm.common.rx.RxTransformer
-import com.hexfan.kotlinmvvm.model.pojo.Forecast
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import javax.inject.Inject

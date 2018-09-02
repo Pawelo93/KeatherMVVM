@@ -1,6 +1,7 @@
 package com.hexfan.kotlinmvvm.di.module
 
 import com.hexfan.kotlinmvvm.ui.main.MainActivity
+import com.hexfan.kotlinmvvm.ui.main.MainActivityModule
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 

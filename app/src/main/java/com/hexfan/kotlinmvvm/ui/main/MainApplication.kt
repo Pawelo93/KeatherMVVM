@@ -2,7 +2,7 @@ package com.hexfan.kotlinmvvm.ui.main
 
 import android.app.Activity
 import android.app.Application
-import com.hexfan.kotlinmvvm.di.DaggerAppComponent
+import com.hexfan.kotlinmvvm.di.component.DaggerAppComponent
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector

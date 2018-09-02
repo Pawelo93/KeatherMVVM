@@ -3,9 +3,9 @@ package com.hexfan.kotlinmvvm.ui.main
 import android.arch.core.executor.testing.InstantTaskExecutorRule
 import android.arch.lifecycle.Observer
 import com.hexfan.kotlinmvvm.TestTransformer
-import com.hexfan.kotlinmvvm.common.domain.GetTodayForecastUseCase
-import com.hexfan.kotlinmvvm.model.pojo.Forecast
-import com.hexfan.kotlinmvvm.model.pojo.Weather
+import com.hexfan.kotlinmvvm.common.domain.forecast.GetTodayForecastUseCase
+import com.hexfan.kotlinmvvm.common.domain.model.Forecast
+import com.hexfan.kotlinmvvm.common.domain.model.Weather
 import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.whenever
 import io.reactivex.Single

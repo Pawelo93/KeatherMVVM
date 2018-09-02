@@ -1,4 +1,6 @@
-package com.hexfan.kotlinmvvm.model.pojo
+package com.hexfan.kotlinmvvm.common.domain.model
+
+import com.hexfan.kotlinmvvm.common.domain.model.Weather
 
 data class Forecast(
         val cityId: Int,

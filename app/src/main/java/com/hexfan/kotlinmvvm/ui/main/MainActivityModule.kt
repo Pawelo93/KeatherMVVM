@@ -1,10 +1,8 @@
-package com.hexfan.kotlinmvvm.di.module
+package com.hexfan.kotlinmvvm.ui.main
 
-import com.hexfan.kotlinmvvm.common.domain.GetTodayForecastUseCase
+import com.hexfan.kotlinmvvm.common.domain.forecast.GetTodayForecastUseCase
+import com.hexfan.kotlinmvvm.common.network.service.OpenWeatherMapService
 import com.hexfan.kotlinmvvm.common.rx.IOTransformer
-import com.hexfan.kotlinmvvm.model.api.OpenWeatherMapService
-import com.hexfan.kotlinmvvm.ui.main.MainActivity
-import com.hexfan.kotlinmvvm.ui.main.MainViewModel
 import com.hexfan.kotlinmvvm.utils.ReactiveLocationProvider
 import dagger.Module
 import dagger.Provides

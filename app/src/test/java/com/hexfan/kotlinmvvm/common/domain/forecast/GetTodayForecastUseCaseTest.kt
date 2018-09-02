@@ -1,11 +1,10 @@
 package com.hexfan.kotlinmvvm.common.domain.forecast
 
-import com.hexfan.kotlinmvvm.common.domain.GetTodayForecastUseCase
-import com.hexfan.kotlinmvvm.common.domain.model.ForecastResponse
-import com.hexfan.kotlinmvvm.common.domain.model.MainWeatherResponse
-import com.hexfan.kotlinmvvm.common.domain.model.WeatherResponse
-import com.hexfan.kotlinmvvm.common.domain.model.WindResponse
-import com.hexfan.kotlinmvvm.model.api.OpenWeatherMapService
+import com.hexfan.kotlinmvvm.common.network.response.ForecastResponse
+import com.hexfan.kotlinmvvm.common.network.response.MainWeatherResponse
+import com.hexfan.kotlinmvvm.common.network.response.WeatherResponse
+import com.hexfan.kotlinmvvm.common.network.response.WindResponse
+import com.hexfan.kotlinmvvm.common.network.service.OpenWeatherMapService
 import com.nhaarman.mockito_kotlin.whenever
 import io.reactivex.Single
 import org.junit.Before

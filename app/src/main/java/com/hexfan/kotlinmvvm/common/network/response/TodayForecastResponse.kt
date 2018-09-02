@@ -1,4 +1,4 @@
-package com.hexfan.kotlinmvvm.common.domain.model
+package com.hexfan.kotlinmvvm.common.network.response
 
 data class ForecastResponse(
         val id: Int,

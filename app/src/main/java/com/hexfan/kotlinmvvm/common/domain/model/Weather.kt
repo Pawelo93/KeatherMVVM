@@ -1,4 +1,4 @@
-package com.hexfan.kotlinmvvm.model.pojo
+package com.hexfan.kotlinmvvm.common.domain.model
 
 data class Weather(
         val temperature: Int,

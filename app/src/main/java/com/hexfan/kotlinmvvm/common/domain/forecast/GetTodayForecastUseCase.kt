@@ -1,9 +1,9 @@
-package com.hexfan.kotlinmvvm.common.domain
+package com.hexfan.kotlinmvvm.common.domain.forecast
 
-import com.hexfan.kotlinmvvm.common.domain.model.ForecastResponse
-import com.hexfan.kotlinmvvm.model.api.OpenWeatherMapService
-import com.hexfan.kotlinmvvm.model.pojo.Forecast
-import com.hexfan.kotlinmvvm.model.pojo.Weather
+import com.hexfan.kotlinmvvm.common.network.response.ForecastResponse
+import com.hexfan.kotlinmvvm.common.network.service.OpenWeatherMapService
+import com.hexfan.kotlinmvvm.common.domain.model.Forecast
+import com.hexfan.kotlinmvvm.common.domain.model.Weather
 import io.reactivex.Single
 import javax.inject.Inject
 

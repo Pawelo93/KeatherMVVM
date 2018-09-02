@@ -1,8 +1,8 @@
 package com.hexfan.kotlinmvvm.common.network
 
 import com.hexfan.kotlinmvvm.BuildConfig
-import com.hexfan.kotlinmvvm.model.api.AuthorizingInterceptor
-import com.hexfan.kotlinmvvm.model.api.OpenWeatherMapService
+import com.hexfan.kotlinmvvm.common.network.service.AuthorizingInterceptor
+import com.hexfan.kotlinmvvm.common.network.service.OpenWeatherMapService
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient

@@ -5,7 +5,7 @@ import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.hexfan.kotlinmvvm.R
-import com.hexfan.kotlinmvvm.model.pojo.Forecast
+import com.hexfan.kotlinmvvm.common.domain.model.Forecast
 import com.hexfan.kotlinmvvm.utils.PermissionsManager
 import com.hexfan.kotlinmvvm.utils.ReactiveLocationProvider
 import com.hexfan.kotlinmvvm.utils.observe
